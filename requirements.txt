@@ -1,0 +1,13 @@
+Flask
+langchain-community
+langchain-text-splitters
+langchain-cohere==0.4.4
+langchain-core
+pinecone-client
+langchain-pinecone==0.2.9
+python-dotenv
+nltk
+gunicorn
+unstructured
+pypdf
+cohere==5.12.0

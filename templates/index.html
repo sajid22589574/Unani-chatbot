@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unani Firdous Ul Hikmat Chatbot</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body class="dark-mode">
+
+    <div class="app-layout">
+        
+        <!-- Main Chat Interface -->
+        <div class="chatbot-container">
+            <header class="chatbot-header">
+                <h1>Unani Firdous Ul Hikmat Chatbot</h1>
+                <div class="header-buttons">
+                    <button id="new-chat-btn" aria-label="Start new chat"><i class="fas fa-plus"></i> New Chat</button>
+                    <button id="open-panel-btn" aria-label="Open control panel"><i class="fas fa-bars"></i></button>
+                </div>
+            </header>
+            
+            <div class="chat-window" id="chat-window">
+                <div class="message bot-message">
+                    <p>Hello! I'm your Unani Firdous Ul Hikmat assistant. Select a topic from the control panel or ask me a question.</p>
+                </div>
+            </div>
+
+            <footer class="chat-input-area">
+                <input type="text" id="user-input" placeholder="Type your message here..." aria-label="Chat input">
+                <button id="send-btn" aria-label="Send message"><i class="fas fa-paper-plane"></i></button>
+            </footer>
+        </div>
+
+        <!-- Control Panel -->
+        <div class="control-panel hidden">
+            <button id="close-panel-btn" class="close-panel-btn" aria-label="Close control panel"><i class="fas fa-times"></i></button>
+            <div class="control-section settings-panel">
+                <h2>Settings</h2>
+                <div class="settings">
+                    <button id="theme-toggle-btn" aria-label="Toggle theme"><i class="fas fa-sun"></i></button>
+                    <button id="font-size-increase-btn" aria-label="Increase font size">A+</button>
+                    <button id="font-size-decrease-btn" aria-label="Decrease font size">A-</button>
+                    <button id="clear-history-btn" aria-label="Clear chat history"><i class="fas fa-trash"></i></button>
+                </div>
+            </div>
+
+
+            <div class="control-section topic-suggestions">
+                <h2>Suggested Topics</h2>
+                <input type="text" id="topic-search" placeholder="Search topics...">
+                <div id="topic-cards-container" class="topic-cards-container">
+                    <!-- Topic cards will be dynamically inserted here -->
+                </div>
+            </div>
+
+            <div id="favorites-panel" class="control-section favorites-panel">
+                <h2><i class="fas fa-star"></i> Favorite Topics</h2>
+                <ul id="favorites-list">
+                    <!-- Favorite topics will be listed here -->
+                </ul>
+            </div>
+
+            <!-- About Me Section -->
+            <div class="control-section about-me-panel">
+                <h2>About This Chatbot</h2>
+                <div class="about-me-content">
+                    <p>This chatbot is dedicated to preserving and disseminating the knowledge of Unani (Greco-Arabic) medicine, drawing its wisdom primarily from the esteemed text, "Firdous Ul Hikmat."</p>
+                    <p>Unani medicine is a traditional system of healing that originated in ancient Greece and was developed by Arab and Persian physicians. It emphasizes the balance of the body's four humors (blood, phlegm, yellow bile, and black bile) and the importance of natural remedies.</p>
+                    <h3>Mission</h3>
+                    <p>To make the rich heritage of Unani medicine accessible through an AI-powered tool, assisting students, practitioners, and enthusiasts in exploring its principles, treatments, and herbal remedies.</p>
+                    <h3>Vision</h3>
+                    <p>To foster a deeper understanding and appreciation for traditional healing systems, contributing to holistic well-being through knowledge-sharing and technological innovation.</p>
+                </div>
+            </div>
+
+            <!-- Donation Section -->
+            <div class="control-section donation-panel">
+                <h2>Donation</h2>
+                <div class="donation-content">
+                    <p>Your support can make a real difference in medical education! This project is entirely self-funded, and your contributions help cover:</p>
+                    <ul>
+                        <li><strong>API Costs:</strong> Cohere and other AI model usage fees</li>
+                        <li><strong>Server Hosting:</strong> Keeping the chatbot online 24/7</li>
+                        <li><strong>Development Time:</strong> Continuous improvements and new features</li>
+                        <li><strong>Future Expansions:</strong> Adding more subjects and advanced features</li>
+                    </ul>
+                    <h3>💝 How to Donate</h3>
+                    <p><strong>UPI ID:</strong> <code>sajid2251@ybl</code></p>
+                    <p>Every contribution, no matter how small, directly impacts medical students worldwide. Your generosity helps keep this educational resource free and continuously improving.</p>
+                    <p><strong>Thank you for supporting medical education!</strong> 🙏</p>
+                </div>
+            </div>
+
+            <!-- Privacy Policy Section -->
+            <div class="control-section privacy-policy-panel">
+                <h2>Privacy Policy</h2>
+                <div class="privacy-policy-content">
+                    <p>This Privacy Policy describes how the Unani Firdous Ul Hikmat Chatbot collects, uses, and protects your information.</p>
+                    <h3>1. Information We Collect</h3>
+                    <ul>
+                        <li><strong>Chat Interactions:</strong> We collect your chat questions and the chatbot's responses to improve the service. This data is used for model training and performance analysis.</li>
+                        <li><strong>Usage Data:</strong> We collect anonymous usage data, such as features used, interaction frequency, and technical information (e.g., browser type, operating system) to understand how the chatbot is used and to enhance its functionality.</li>
+                        <li><strong>Donation Information:</strong> If you choose to donate, we collect only the information necessary to process your donation (e.g., UPI ID). We do not store sensitive financial details.</li>
+                    </ul>
+                    <h3>2. How We Use Your Information</h3>
+                    <ul>
+                        <li><strong>Service Improvement:</strong> To analyze and improve the accuracy, relevance, and overall quality of the chatbot's responses.</li>
+                        <li><strong>Feature Development:</strong> To understand user needs and develop new features and functionalities.</li>
+                        <li><strong>Troubleshooting:</strong> To diagnose and fix technical issues.</li>
+                        <li><strong>Analytics:</strong> To monitor usage patterns and optimize performance.</li>
+                    </ul>
+                    <h3>3. Data Sharing and Disclosure</h3>
+                    <p>We do not sell, trade, or otherwise transfer your personally identifiable information to outside parties. We may share aggregated or anonymized data that cannot be used to identify you for you for research, analysis, or marketing purposes.</p>
+                    <p>We may disclose your information if required by law or in response to valid requests by public authorities (e.g., a court order or government agency).</p>
+                    <h3>4. Data Security</h3>
+                    <p>We implement a variety of security measures to maintain the safety of your personal information when you interact with our chatbot. However, no method of transmission over the Internet or method of electronic storage is 100% secure.</p>
+                    <h3>5. Third-Party Services</h3>
+                    <p>The chatbot utilizes third-party services (e.g., Cohere for AI models, Pinecone for vector database). These services have their own privacy policies, and we encourage you to review them. We are not responsible for the practices of these third-party services.</p>
+                    <h3>6. Your Consent</h3>
+                    <p>By using our chatbot, you consent to our Privacy Policy.</p>
+                    <h3>7. Changes to this Privacy Policy</h3>
+                    <p>We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page. You are advised to review this Privacy Policy periodically for any changes.</p>
+                    <h3>8. Contact Us</h3>
+                    <p>If you have any questions regarding this Privacy Policy, you may contact us at: <strong>syedsajidhussain10@gmail.com</strong></p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
