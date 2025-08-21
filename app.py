@@ -1,10 +1,12 @@
 from flask import Flask, render_template, request, jsonify
+from flask_cors import CORS
 from rag_chatbot_v3 import RAGChatbot
 import logging
 import os
 from werkzeug.utils import secure_filename
 
 app = Flask(__name__, template_folder='templates')
+CORS(app)  # Enable CORS for all routes
 
 # Configure upload folder
 UPLOAD_FOLDER = 'docs/'
